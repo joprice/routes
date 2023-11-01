@@ -1,2 +1,4 @@
 (library
- (public_name routes))
+ (libraries melange.belt)
+ (modes melange)
+ (public_name routes_melange))

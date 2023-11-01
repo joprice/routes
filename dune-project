@@ -1,8 +1,9 @@
-(lang dune 2.9)
+(lang dune 3.8)
 
-(name routes)
+(name routes_melange)
 
 (using mdx 0.1)
+(using melange 0.1)
 
 (generate_opam_files true)
 
@@ -18,7 +19,7 @@
 (license BSD-3-clause)
 
 (package
- (name routes)
+ (name routes_melange)
  (tags
   (router http))
  (depends

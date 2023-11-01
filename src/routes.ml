@@ -23,7 +23,7 @@ module PatternTrie = struct
       | Wildcard : t
   end
 
-  module KeyMap = Map.Make (String)
+  module KeyMap = Belt.Map.String
 
   type 'a node =
     { parsers : 'a list
@@ -44,7 +44,7 @@ module PatternTrie = struct
       | { parsers = rs; _ }, [ "" ] -> rs
       | { parsers = rs; wildcard; _ }, _ when wildcard -> rs
       | { children; capture; _ }, x :: xs ->
-        (match KeyMap.find_opt x children with
+        (match KeyMap.get children x with
          | None ->
            (match capture with
             | None -> []
@@ -62,12 +62,12 @@ module PatternTrie = struct
         (match x with
          | Key.Match w ->
            let t' =
-             match KeyMap.find_opt w children with
+             match KeyMap.get children w with
              | None -> empty
              | Some v -> v
            in
            let t'' = aux r t' in
-           { n with children = KeyMap.add w t'' children }
+           { n with children = KeyMap.set children w t'' }
          | Key.Capture ->
            let t' =
              match capture with
@@ -84,15 +84,12 @@ module PatternTrie = struct
   let rec union t1 t2 =
     let parsers = t1.parsers @ t2.parsers in
     let children =
-      KeyMap.merge
-        (fun _ l r ->
-          match l, r with
-          | None, None -> assert false
-          | None, Some r -> Some r
-          | Some l, None -> Some l
-          | Some l, Some r -> Some (union l r))
-        t1.children
-        t2.children
+      KeyMap.merge t1.children t2.children (fun _ l r ->
+        match l, r with
+        | None, None -> assert false
+        | None, Some r -> Some r
+        | Some l, None -> Some l
+        | Some l, Some r -> Some (union l r))
     in
     let capture =
       match t1.capture, t2.capture with
