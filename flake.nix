@@ -58,6 +58,8 @@
           ppxlib
           reason-react
           uri
+          core_unix
+          core_bench
         ];
         nativeBuildInputs = [
           findlib
@@ -67,6 +69,7 @@
           dune_3
           reason-native.refmterr
           ocamlformat
+          mdx
         ];
         OCAMLRUNPARAM = "b";
       };

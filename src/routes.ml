@@ -165,15 +165,15 @@ let rec route_pattern : type a b. (a, b) path -> PatternTrie.Key.t list = functi
   | Conv (_, fmt) -> PatternTrie.Key.Capture :: route_pattern fmt
 ;;
 
-let pp_path' path =
-  let rec aux : type a b. (a, b) path -> string list = function
-    | End -> []
-    | Wildcard -> [ ":wildcard" ]
-    | Match (w, fmt) -> w :: aux fmt
-    | Conv ({ label; _ }, fmt) -> label :: aux fmt
-  in
-  aux path
-;;
+(* let pp_path' path = *)
+(*   let rec aux : type a b. (a, b) path -> string list = function *)
+(*     | End -> [] *)
+(*     | Wildcard -> [ ":wildcard" ] *)
+(*     | Match (w, fmt) -> w :: aux fmt *)
+(*     | Conv ({ label; _ }, fmt) -> label :: aux fmt *)
+(*   in *)
+(*   aux path *)
+(* ;; *)
 
 (* let pp_target fmt t = Format.fprintf fmt "%s" ("/" ^ String.concat "/" @@ pp_path' t) *)
 (* let string_of_path t = Format.asprintf "%a" pp_target t *)
@@ -182,7 +182,7 @@ let pp_path' path =
 
 let ksprintf' k path =
   let rec aux : type a b. (string list -> b) -> (a, b) path -> a =
-   fun k -> function
+    fun k -> function
     | End -> k []
     | Wildcard -> fun { Parts.matched; _ } -> k (List.concat [ matched; [] ])
     | Match (w, fmt) -> aux (fun s -> k @@ (w :: s)) fmt
@@ -203,7 +203,7 @@ let parse_route path handler params =
   let rec match_target
     : type a b. (a, b) path -> a -> string list -> string list -> b match_result
     =
-   fun t f seen s ->
+    fun t f seen s ->
     match t with
     | End ->
       (match s with
