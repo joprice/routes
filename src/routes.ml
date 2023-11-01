@@ -175,10 +175,10 @@ let pp_path' path =
   aux path
 ;;
 
-let pp_target fmt t = Format.fprintf fmt "%s" ("/" ^ String.concat "/" @@ pp_path' t)
-let string_of_path t = Format.asprintf "%a" pp_target t
-let pp_route fmt (Route (p, _, _)) = pp_target fmt p
-let string_of_route r = Format.asprintf "%a" pp_route r
+(* let pp_target fmt t = Format.fprintf fmt "%s" ("/" ^ String.concat "/" @@ pp_path' t) *)
+(* let string_of_path t = Format.asprintf "%a" pp_target t *)
+(* let pp_route fmt (Route (p, _, _)) = pp_target fmt p *)
+(* let string_of_route r = Format.asprintf "%a" pp_route r *)
 
 let ksprintf' k path =
   let rec aux : type a b. (string list -> b) -> (a, b) path -> a =

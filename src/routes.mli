@@ -205,11 +205,11 @@ val sprintf : ('a, string) path -> 'a
       -: "foo/:int/add/:bool"
     ]}
     @since 0.8.0 *)
-val pp_target : Format.formatter -> ('a, 'b) path -> unit
+(* val pp_target : Format.formatter -> ('a, 'b) path -> unit *)
 
 (** [pp_route] is similar to [pp_target], except it takes a route (combination of path
     sequence and a handler) as input, instead of just a path sequence. *)
-val pp_route : Format.formatter -> 'a route -> unit
+(* val pp_route : Format.formatter -> 'a route -> unit *)
 
 (** [string_of_path] converts a sequence of path params to a human readable string that
     indicates the kind of pattern that a route will match. When creating a custom pattern
@@ -224,13 +224,13 @@ val pp_route : Format.formatter -> 'a route -> unit
       -: "foo/:int/add/:bool"
     ]}
     @since 2.0.0 *)
-val string_of_path : ('a, 'b) path -> string
+(* val string_of_path : ('a, 'b) path -> string *)
 
 (** [string_of_route] is similar to [string_of_path], except it takes a route (combination
     of path sequence and a handler) as input, instead of just a path sequence.
 
     @since 2.0.0 *)
-val string_of_route : 'a route -> string
+(* val string_of_route : 'a route -> string *)
 
 (** [add_route] takes a route and a router as input, and returns a new router which
     contains the route provided as input.
