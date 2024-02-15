@@ -4,14 +4,14 @@ module Util = struct
       match target with
       | "" | "/" -> []
       | _ ->
-        (match Js.String.split ~sep:"/" target () |> Array.to_list with
+        (match Js.String.split ~sep:"/" target |> Array.to_list with
          | "" :: xs -> xs
          | xs -> xs)
     in
     match String.index_opt target '?' with
     | None -> split_target target
     | Some 0 -> []
-    | Some i -> split_target (Js.String.substr ~start:0 ~len:i target ())
+    | Some i -> split_target (Js.String.substring ~start:0 ~end_:i target)
   ;;
 end
 

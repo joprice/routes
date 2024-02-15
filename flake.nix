@@ -47,18 +47,18 @@
     rec {
       devShells.default = pkgs.mkShell {
         buildInputs = [
-          alcotest
-          alcotest-lwt
-          dream
-          fmt
-          lwt
-          lwt_ppx
-          #melange-webapi
+          #alcotest
+          #alcotest-lwt
+          #dream
+          #fmt
+          #lwt
+          #lwt_ppx
+          ##melange-webapi
           melange
-          ocaml_pcre
-          ppxlib
-          #reason-react
-          uri
+          #ocaml_pcre
+          #ppxlib
+          ##reason-react
+          #uri
           core_unix
           core_bench
         ];
@@ -66,9 +66,9 @@
           findlib
           ocaml
           ocaml-lsp
-          reason
+          #reason
           dune_3
-          reason-native.refmterr
+          #reason-native.refmterr
           ocamlformat
           mdx
         ];
